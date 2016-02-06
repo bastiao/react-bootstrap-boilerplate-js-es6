@@ -36,7 +36,7 @@ gulp.task('deploy', function(){
 // It will start watching for changes in every .js file.
 // If there's a change, the task 'scripts' defined above will fire.
 gulp.task('default', function() {
-	gulp.watch(['./**/*.js','./app.js','!./web/*.js'], ['scripts']);
+	gulp.watch(['./**/*.js','./js/app.js','!./web/*.js'], ['scripts']);
 });
 
 // Private Functions
@@ -46,7 +46,7 @@ function bundleApp(isProduction) {
 	// Browserify will bundle all our js files together in to one and will let
 	// us use modules in the front end.
 	var appBundler = browserify({
-    	entries: 'app.js',
+    	entries: 'js/app.js',
     	debug: true
   	})
 
@@ -88,7 +88,8 @@ function bundleApp(isProduction) {
 
 gulp.task('watch', function() {
   gulp.watch('src/index.html', ['html'])
-  gulp.watch('app.js', ['deploy'])
+  gulp.watch('js/app.js', ['deploy'])
+  gulp.watch('js/**', ['deploy'])
 	gulp.watch('components/**', ['deploy'])
 	gulp.watch('data.js', ['deploy'])
   gulp.watch('src/styles/**', ['styles'])

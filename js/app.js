@@ -18,6 +18,19 @@ import data from './data';
 import {MenuSidebar} from './components/menu'
 
 
+import {Provider} from 'react-redux';
+import configureStore from './store/configureStore';
+import Home from './components/Home';
+const __DEVTOOLS__ = true;
+const __DEV__ = true;
+
+import {renderDevTools} from './utils/devTools';
+
+
+
+const store = configureStore();
+
+
 var Index = React.createClass({
   render() {
     return (
@@ -27,6 +40,11 @@ var Index = React.createClass({
           Routes can have multiple components, so that all portions of your UI
           can participate in the routing.
         </p>
+        {/* <Home /> is your app entry point */}
+        <Provider store={store}>
+          <Home />
+        </Provider>
+
       </div>
     );
   }
@@ -278,6 +296,10 @@ var App = React.createClass({
 
       </div>
 
+
+        {/* only renders when running in DEV mode */
+          renderDevTools(store)
+        }
       </div>
 
     );
